@@ -1,10 +1,16 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+class VagrantPlugins::ProviderVirtualBox::Action::Network
+  def dhcp_server_matches_config?(dhcp_server, config)
+    true
+  end
+end
+
 Vagrant.configure("2") do |config|
   config.vm.define "jenkins" do |jenkins|
     jenkins.vm.box = "geerlingguy/centos7"
-    jenkins.vm.network "private_network", ip = "10.0.0.15"
+    jenkins.vm.network "private_network", type: "dhcp"
     jenkins.vm.hostname = "jenkins"
     jenkins.vm.provider "virtualbox" do |v|
       v.name = "jenkins"
