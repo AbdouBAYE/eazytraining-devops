@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress
+  labels:
+    app: wordpress
+  namespace: wordpress
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: wordpress
+      tier: front
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        tier: front
+    spec:
+      containers:
+      - name: front
+        image: wordpress
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: /var/www/html
+            name: wordpress-data
+        env:
+          - name: WORDPRESS_DB_HOST
+            value: service-mysql
+          - name: WORDPRESS_DB_NAME
+            value: wordpress_DB
+          - name: WORDPRESS_DB_USER
+            value: abdou
+          - name: WORDPRESS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: wordpress-secret
+                key: wordpress_db_password
+      volumes:
+      - name: wordpress-data
+        hostPath:
+          path: /data/wordpress
+          type: Directory
