@@ -1,0 +1,27 @@
+---
+- name: "Apach install with Docker"
+  hosts: prod
+  become: true
+   #vars:
+   # ansible_sudo_pass: abdou
+  pre_tasks:
+  - name: Install some package
+    package: name='{{ item }}' state=present
+    when: ansible_distribution == "CentOS"
+    loop:
+      - epel-release
+      - wget
+      - git 
+  tasks:
+  - name: Copy website file template
+    template:
+      src: index.html.j2
+      dest: /home/abdou/index.html
+  - name: Create a data container
+    docker_container:
+      name: webapp
+      image: httpd
+      ports:
+        - "80:80"
+      volumes:
+        - /home/abdou/index.html:/usr/local/apache2/htdocs/index.html

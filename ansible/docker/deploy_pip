@@ -1,0 +1,9 @@
+---
+- name: "install Docker"
+  hosts: prod
+  become: true
+  tasks:
+    - name: Install python pip
+        get_url:
+          url:
+          dest:

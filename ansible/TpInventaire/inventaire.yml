@@ -1,0 +1,5 @@
+all:
+  hosts:
+    client1:
+      ansible_user: abdou
+      ansible_password: abdou

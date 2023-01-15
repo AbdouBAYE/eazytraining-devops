@@ -1,0 +1,12 @@
+---
+- name: "install Docker"
+  hosts: prod
+  become: true
+  vars:
+    ansible_sudo_pass: abdou
+    pip_install_packages:
+      - name: docker
+    docker_users:
+      - abdou
+  roles:
+    - geerlingguy.docker

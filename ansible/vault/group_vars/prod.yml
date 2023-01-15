@@ -1,0 +1,4 @@
+ansible_user: abdou
+ansible_password: "{{vault_ansible_password}}"
+ansible_become_password: "{{vault_ansible_become_password}}"
+

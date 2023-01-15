@@ -1,0 +1,3 @@
+ansible_user: abdou
+ansible_password: abdou
+ansible_become_password: abdou
