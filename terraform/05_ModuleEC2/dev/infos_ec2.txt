@@ -1,0 +1,2 @@
+PUBLIC IP: 50.19.116.155 ; ID: i-0a09b3e55d2dae6f7 ; AZ: us-east-1c  
+PUBLIC IP: 34.232.222.24 ; ID: i-0ff3be929a77d6c41 ; AZ: us-east-1c  
